@@ -1,0 +1,46 @@
+view.css
+
+.jobdetails{
+    
+    text-align: center;
+    font-family: sans-serif;
+  }
+  
+  .conttt {
+    max-width: 600px;
+    margin: 3px auto;
+    margin-bottom: 50px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .job-details {
+    text-align: left;
+    font-size: 40px;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .fontTitle {
+    font-weight:600;
+    margin-right: 5px;
+    margin-left: 30px;
+  }
+  
+  .list-item {
+    list-style-type: disc;
+    margin-left: 20px;
+    font-size: large;
+  }
+  .back-button {
+    margin-top: 5px; /* Add some top margin for spacing */
+  margin-left: 30px;
+  size: small;
+}
+  /* Add any additional styles based on your design requirements */
+  
