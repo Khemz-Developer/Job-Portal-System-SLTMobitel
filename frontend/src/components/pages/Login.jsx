@@ -21,36 +21,7 @@ const Login = () => {
   });
 
  
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
 
-  //   try {
-  //     const response = await axios.post('http://localhost:3000/api/v1/users/login', formData);
-
-  //     if (response.status === 200) {
-  //       // Successful login
-  //       const { token,role } = response.data;
-  //       login(token);
-  //       // Navigate based on the user's role
-  //       if (role === 'admin') {
-  //         navigate('/create'); // Redirect to admin route
-  //         alert("Login successful! Redirecting to admin dashboard.");
-  //       } else if (role === 'user') {
-  //         navigate('/uservacancy'); // Redirect to user route
-  //         alert("Login successful! Redirecting to user dashboard.");
-  //          //alerat as log in successfull
-  //       }
-  //     } else {
-  //       // Login failed
-  //       console.error('Login failed:', response.data.message);
-  //       alert("Error: " + response.data.message);
-  //     }
-  //   } catch (error) {
-  //     // Handle network errors or unexpected errors
-  //     console.error('Error during login:', error);
-  //     alert("Error: " + error);
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
