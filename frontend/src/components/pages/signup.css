@@ -68,12 +68,13 @@
 }
 
 .custom-btn{
-    background-color: #ffffff;
+    background-color: #ffffff !important;
     color: #0055a2;
     font-weight: 700;
     border-radius:  3cm;
     width: 150px;
     font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .custom-btn:hover{

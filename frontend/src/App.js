@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import About from "./components/pages/About";
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
-import Vacancies from "./components/pages/Vacancies";
+
 import { AuthProvider } from "../src/components/pages/Authcontext";
 // import Footer from "./components/Footer";
 import AcceptedCVs from "./components/SidePages/AcceptedCVs";
@@ -18,6 +18,7 @@ import UserJopApply from "./components/usersidepages/UserJopApply";
 import UserVacancy from "./components/usersidepages/UserVacancy";
 import JobUpdate from "./components/SidePages/JobUpdate";
 import View from "./components/SidePages/View";
+import UserJobView from "./components/usersidepages/UserJobView";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/vacancies" element={<Vacancies />} />
+          
               <Route path="/signup" element={<SignUp />} />
 
               {/*ROUTE FOR ADMIN PAGES*/}
@@ -54,6 +55,7 @@ function App() {
               <Route path="/uservacancy" element={<UserVacancy />} />
               <Route path="/apply" element={<UserJopApply />} />
               <Route path="/status" element={<UserJobStatus />} />
+              <Route path="/user-job-view/:id" element={<UserJobView/>}/>
             </Routes>
             {/* <Footer /> */}
           </div>

@@ -8,7 +8,7 @@ const About = () => {
       <br />
       <br />
       <br />
-      <div class="container">
+      <div className="container">
         <h1 className="Main-Topic">SLT-Mobitel Job Portal System</h1>
         <p className="paragraph-top">Welcome to the SLT-Mobitel Job Portal System, where opportunities meet talent in the digital realm. Our job portal is a dynamic platform designed to connect job seekers with exciting career opportunities and assist employers in finding the perfect match for their teams.</p>
     </div>

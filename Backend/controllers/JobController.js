@@ -9,8 +9,6 @@ const getAllJobs = async (req, res) => {
     }
   };
 
-
-
 const saveJob = (req,resp)=>{
   
   // Create a new Job instance using the data from the request body
