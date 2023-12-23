@@ -7,6 +7,11 @@ const UserVacancy = () => {
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
+  //for pagination ----
+  const [currentPage, setCurrentPage] = useState(1);
+  const [jobsPerPage] = useState(4); // can adjust the number of jobs per page here
+
+
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -39,6 +44,14 @@ const UserVacancy = () => {
     fetchData(); // Call fetchData function when the component mounts
   }, []); // The empty dependency array means this useEffect runs once after the initial render
 
+
+  //pagination logic ----
+  const indexOfLastJob = currentPage * jobsPerPage;
+  const indexOfFirstJob = indexOfLastJob - jobsPerPage;
+  const currentJobs = jobs.slice(indexOfFirstJob, indexOfLastJob);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  
   return (
     <div>
       <br></br>
@@ -65,7 +78,7 @@ const UserVacancy = () => {
       <div className="main-div">
         <div className="row">
           <div className="Right-side  ">
-            {jobs.map((job, index) => (
+            {currentJobs.map((job, index) => (
               <JobCard
                 key={job._id}
                 jobField={job.jobField}
@@ -82,6 +95,16 @@ const UserVacancy = () => {
             ))}
           </div>
         </div>
+         {/* Pagination */}
+         <ul className="pagination">
+            {Array.from({ length: Math.ceil(jobs.length / jobsPerPage) }, (_, i) => (
+              <li key={i} className={`page-item ${i + 1 === currentPage ? "active" : ""}`}>
+                <button className="page-link" onClick={() => paginate(i + 1)}>
+                  {i + 1}
+                </button>
+              </li>
+            ))}
+          </ul>
       </div>
     </div>
   );
