@@ -69,6 +69,8 @@
 
 import React, { useState } from "react";
 import "./jobcard.css";
+import { Link } from "react-router-dom";
+
 
 const JobCard = (props) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -90,26 +92,29 @@ const JobCard = (props) => {
 
             {showDetails && (
               <div className="row">
-                <p className="card-text">Location: {props.workLocation}</p>
-                <p className="card-text">Salary: Rs: {props.salary}</p>
-                <p className="card-text">Due Date: {props.dueDate}</p>
-                <p className="card-text">Work Method: {props.workMethod}</p>
-                <p className="card-text">Work Type: {props.workType}</p>
-                <p className="card-text">
+                
+                <p className="card-text mx-2">Location: {props.workLocation}</p>
+                <p className="card-text mx-2">Salary: Rs: {props.salary}</p>
+                <p className="card-text mx-2">Due Date: {props.dueDate}</p>
+                <p className="card-text mx-2">Work Method: {props.workMethod}</p>
+                <p className="card-text mx-2">Work Type: {props.workType}</p>
+                <p className="card-text mx-2">
                   Required Skills: {props.requiredSkills.join(", ")}
                 </p>
-                <p className="card-text">
-                  Educational Qualifications: {props.educationalQualifications}
+                <p className="card-text mx-2">
+                   Educational Qualifications: {props.educationalQualifications}
                 </p>
-                <button className="btn btn-outline-primary  m-2 col-2"> 
-                  Apply
-                </button>
+                <Link to={"/apply"}>
+                  <button className="btn btn-outline-primary  mx-2 col-2">
+                    Apply
+                  </button>
+                </Link>
               </div>
             )}
             <div className="row">
               <div className="col">
                 <button
-                  className={`btn btn-outline-primary px-3  mt-3 ${
+                  className={`btn btn-outline-primary px-3 mx-2  mt-2 ${
                     showDetails ? "btn-outline-danger" : ""
                   }`}
                   onClick={toggleDetails}
@@ -117,9 +122,7 @@ const JobCard = (props) => {
                   {showDetails ? "Hide Details" : "See More"}
                 </button>
               </div>
-              <div className="col">
-                
-              </div>
+              <div className="col"></div>
             </div>
           </div>
         </div>

@@ -46,6 +46,28 @@ const findJob = (req,resp)=>{
     });
 };
 
+const JobFind = (req, resp) => {
+  const searchTerm = req.headers.searchterm;
+  const searchRegex = new RegExp(searchTerm, 'i'); // 'i' makes the search case-insensitive
+
+  Job.find({
+    $or: [
+      { workLocation: searchRegex },
+      { jobField: searchRegex },
+      { jobPosition: searchRegex },
+    ]
+  })
+  .then(results => {
+    if (results.length === 0) {
+      resp.status(404).json({ status: false, message: 'Job not found!' });
+    } else {
+      resp.status(200).json({ status: true, data: results });
+    }
+  })
+  .catch(error => {
+    resp.status(500).json(error);
+  });
+};
 
 
 const deleteJob = async (req, res) => {
@@ -156,5 +178,5 @@ const singleJob  =async(req,res)=>{
   }
 
 module.exports={
-    saveJob,findJob,deleteJob,updateJob,findJobByJobFeild,getAllJobs,singleJob,findJobByJobLocation
+    saveJob,findJob,deleteJob,updateJob,findJobByJobFeild,getAllJobs,singleJob,findJobByJobLocation,JobFind
 }
