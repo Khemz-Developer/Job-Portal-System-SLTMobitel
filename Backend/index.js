@@ -36,7 +36,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/job_portal_system')
 
 const userRoute = require('./routes/UserRoute');
 const jobRoute = require('./routes/JobRoute');
+const jobapplyRoute = require('./routes/JobApplyRoute');
 
 app.use('/api/v1/users',userRoute);
 app.use('/api/v1/jobs',jobRoute);
+app.use('/api/v1/applications',jobapplyRoute)
 
