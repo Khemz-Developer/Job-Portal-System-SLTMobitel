@@ -59,7 +59,7 @@ const JobCard = (props) => {
                   >
                     Apply
                   </button>
-                  apply
+                 
                 </Link>
               </div>
             )}

@@ -1,0 +1,44 @@
+/* UserJopApply.css */
+
+.container-user-apply {
+    
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-outline-primary:hover,
+  .btn-outline-primary:active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-outline-danger:hover,
+  .btn-outline-danger:active {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .submit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 550px;
+    
+  }
+  

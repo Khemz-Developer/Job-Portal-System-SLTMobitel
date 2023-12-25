@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./uservacancy.css";
+
 import JobCard from "../JobCard";
 import axios from "axios";
 
@@ -62,7 +63,7 @@ const UserVacancy = () => {
       
       <div className="search-options  mt-5">
       
-        <div className="row my-5">
+        <div className="row my-4">
           <input
             className="col-6 m-3 search-bar"
             type="text"
@@ -77,6 +78,9 @@ const UserVacancy = () => {
 
       <div className="main-div">
         <div className="row">
+          <div className="left-side">
+
+          </div>
           <div className="Right-side  ">
             {currentJobs.map((job, index) => (
               <JobCard
