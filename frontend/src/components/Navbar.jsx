@@ -5,7 +5,8 @@ import { useAuth } from './pages/Authcontext';
 import companyLogo from "../assets/images/sltlogo.png";
 
 const Navbar = () => {
-  const { isLoggedIn, logout, getToken, userRole } = useAuth();
+  //const { isLoggedIn, logout, getToken, userRole } = useAuth();
+  const { isLoggedIn, logout, userRole } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
