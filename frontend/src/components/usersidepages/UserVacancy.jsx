@@ -78,11 +78,9 @@ const UserVacancy = () => {
 
       <div className="main-div">
         <div className="row">
-          <div className="left-side">
-
-          </div>
-          <div className="Right-side  ">
+             {/* <div className="Right-side col "> */}
             {currentJobs.map((job, index) => (
+              <div key={job._id} className="col-md-3 mb-4">
               <JobCard
                 key={job._id}
                 jobField={job.jobField}
@@ -96,8 +94,9 @@ const UserVacancy = () => {
                 requiredSkills={job.requiredSkills}
                 educationalQualifications={job.educationalQualifications}
               />
+              </div>
             ))}
-          </div>
+          {/* </div> */}
         </div>
          {/* Pagination */}
          <ul className="pagination">

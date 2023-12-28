@@ -2,3 +2,15 @@
     background-color: #ffffff;
     height: 600px;
 }
+.active-jobs{
+    position: absolute;
+    top: 55%; /* Adjust the top position to center vertically */
+    left: 51.3%;
+    transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+    /* color: #e0dddd; */
+    color: rgb(12,17,54);
+    font-size: 2.5rem;
+    font-weight: 500;
+    opacity: 70%;
+}
+

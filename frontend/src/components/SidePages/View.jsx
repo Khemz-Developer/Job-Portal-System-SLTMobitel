@@ -56,11 +56,11 @@ const View = () => {
             <span className="fontTitle">Due Date:</span> {job.dueDate}
           </div>
           <div className="mb-4">
-            <span className="fontTitle">Salary: Rs</span> {job.salary}
+            <span className="fontTitle">Salary: Rs</span> {job.salary}.00
           </div>
           <div className="mb-4">
             <span className="fontTitle">Job Description:</span>{" "}
-            {job.jobDescription}
+            <div className="mx-4 px-1 text-justify">{job.jobDescription}</div>
           </div>
 
           <Link
