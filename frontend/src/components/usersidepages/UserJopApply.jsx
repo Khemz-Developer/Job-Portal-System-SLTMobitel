@@ -131,6 +131,7 @@ const UserJopApply = () => {
     const nic = form.nic.value;
     const email = form.email.value;
     const address = form.address.value;
+    const nameofApplicant = form.nameofApplicant.value;
 
     // Extract OL Results from the form
     const olResults = {
@@ -179,6 +180,7 @@ const UserJopApply = () => {
     const newApplication = {
       jobField,
       jobPosition,
+      nameofApplicant, //name
       mobileNumber,
       dateofBirth,
       nic,
@@ -255,7 +257,15 @@ const UserJopApply = () => {
                 />
               </Form.Group>
             </div>
-
+            <Form.Group className="mb-3 col-6" controlId="formFullName">
+                <Form.Label>Full Name :</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Name Of the Applicant"
+                  name="nameofApplicant"
+                  
+                />
+              </Form.Group>
             {/* pdf */}
             <Form.Group className="mb-3 col-12" controlId="formResume">
               <Form.Label>Resume (PDF)</Form.Label>

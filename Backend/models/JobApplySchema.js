@@ -10,6 +10,10 @@ const JobApplySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  nameofApplicant:{
+    type: String,
+
+  },
   cvFile: {
     type: String, //  store the file path or URL in the database
   },
