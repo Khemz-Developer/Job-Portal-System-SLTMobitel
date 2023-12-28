@@ -29,6 +29,7 @@ const JobModify = () => {
         config
       );
       setJobs(response.data);
+      console.log(jobs);
     } catch (error) {
       alert("You must Login First!");
       console.log(error);
