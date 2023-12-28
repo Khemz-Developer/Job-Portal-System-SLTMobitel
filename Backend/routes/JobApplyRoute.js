@@ -9,4 +9,7 @@ const router = express.Router();
 
 router.post('/save-application',verifyController,JobApplyController.saveApplication);
 
+
+//Admin Job Application Received Part
+router.get('/get-all-applications',verifyController,JobApplyController.getAllApplications);
 module.exports=router;
