@@ -23,7 +23,7 @@ const JobCard = (props) => {
   return (
     <>
       <div className="row pt-5">
-        <div className="card col-10 col-md-8 col-lg-10 mx-auto">
+        <div className="card card-style col-10 col-md-8 col-lg-10 mx-auto">
           <div className="card-body">
             <h5 className="card-title mb-3 text-center">{props.jobField}</h5>
             <h6 className="card-subtitle mb-3 mx-2 text-muted text-center">

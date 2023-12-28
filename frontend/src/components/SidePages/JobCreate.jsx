@@ -83,6 +83,7 @@ const JobCreate = () => {
                 <option value="Finance">Finance</option>
                 <option value="Telecommunication">Telecommunication</option>
                 <option value="Software">Software</option>
+                <option value="Management">Management</option>
               </Form.Control>
             </Form.Group>
 

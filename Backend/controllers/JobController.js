@@ -190,6 +190,51 @@ const singleJob  =async(req,res)=>{
     }
   }
 
+
+  // const getUniqueJobFields = async (req, res) => {
+  //   try {
+  //     // Use the distinct method to get unique values of jobField
+  //     const jobFields = await Job.distinct('jobField');
+  
+  //     // Create a response object with jobFields array
+  //     const response = {
+  //       jobFields,
+  //     };
+  //     res.status(200).json(response);
+  //   } catch (error) {
+  //     // Handle errors
+  //     console.error('Error fetching job fields:', error);
+  //     res.status(500).json({ message: 'Error: ' + error.message });
+  //   }
+  // };
+  
+  const getUniqueJobFields = async (req, res) => {
+    try {
+      // Use the aggregate method to count occurrences of each jobField
+      const jobFieldsWithCount = await Job.aggregate([
+        {
+          $group: {
+            _id: '$jobField',
+            count: { $sum: 1 },
+          },
+        },
+      ]);
+  
+      // Create a response object with jobFields array and count for each jobField
+      const response = {
+        jobFields: jobFieldsWithCount,
+      };
+  
+      res.status(200).json(response);
+    } catch (error) {
+      // Handle errors
+      console.error('Error fetching job fields:', error);
+      res.status(500).json({ message: 'Error: ' + error.message });
+    }
+  };
+  
+
+
 module.exports={
-    saveJob,findJob,deleteJob,updateJob,findJobByJobFeild,getAllJobs,singleJob,findJobByJobLocation,JobFind,JobCount
+    saveJob,findJob,deleteJob,updateJob,findJobByJobFeild,getAllJobs,singleJob,findJobByJobLocation,JobFind,JobCount,getUniqueJobFields
 }

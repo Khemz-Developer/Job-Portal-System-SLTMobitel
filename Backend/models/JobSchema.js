@@ -6,7 +6,7 @@ const JobSchema = new mongoose.Schema({
   jobField: {
     type: String,
     required: true,
-    enum: ["HR", "Finance", "Telecommunication", "Software"], // Assuming predefined job fields
+    enum: ["HR", "Finance", "Telecommunication", "Software","Management"], // Assuming predefined job fields
   },
   jobPosition: {
     type: String,
