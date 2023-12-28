@@ -40,7 +40,7 @@ const Footer = () => {
                 <a href="#!">Megaline</a>
               </li>
               <li>
-                <a href="#!">4G/LTE</a>
+                <a href="https://www.mobitel.lk/4g-lte">4G/LTE</a>
               </li>
               <li>
                 <a href="#!">Fibre</a>
@@ -52,7 +52,7 @@ const Footer = () => {
             <h5 className="text-uppercase h5-topic1">BROADBAND</h5>
             <ul className="list-unstyled link-div1">
               <li>
-                <a href="#!">New Connection</a>
+                <a href="https://mobitel.lk/broadband/new-connection">New Connection</a>
               </li>
               <li>
                 <a href="#!">Packeages</a>

@@ -15,26 +15,26 @@ ul li a {
 
 .link-div {
   text-align: left !important;
-  padding-left: 60px;
+  padding-left: 80px;
 }
 
 .link-div1 {
   text-align: left !important;
-  padding-left: 23px;
+  padding-left: 50px;
 }
 .h5-topic0{
-  padding-right:30px ;
+  padding-right:150px ;
 }
 .h5-topic1 {
-  padding-right: 90px;
+  padding-right: 145px;
 }
 
 .h5-topic2 {
-  padding-right: 150px;
+  padding-right: 180px;
 }
 .link-div2 {
   text-align: left !important;
-  padding-left: 20px;
+  padding-left: 30px;
 }
 .link-div3 li {
   display: flex;
@@ -54,7 +54,7 @@ ul li a {
   font-weight: 600;
 }
 .h5-topic3 {
-  padding-right: 100px;
+  padding-right: 120px;
 }
 
 .bottom-word {

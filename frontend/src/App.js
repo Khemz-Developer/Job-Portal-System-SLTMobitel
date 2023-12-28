@@ -56,6 +56,7 @@ function App() {
               <Route path="/apply" element={<UserJopApply />} />
               <Route path="/status" element={<UserJobStatus />} />
               <Route path="/user-job-view/:id" element={<UserJobView/>}/>
+              
             </Routes>
             {/* <Footer /> */}
           </div>

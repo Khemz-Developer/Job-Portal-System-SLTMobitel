@@ -1,3 +1,5 @@
+const { response } = require('express');
+const JobSchema = require('../models/JobSchema');
 const Job =  require('../models/JobSchema');
 
 const getAllJobs = async (req, res) => {
@@ -69,6 +71,17 @@ const JobFind = (req, resp) => {
   });
 };
 
+
+
+const JobCount = (req,resp)=>{
+  try{
+    JobSchema.countDocuments().then((response)=>{
+      return resp.status(200).json(response);
+    })
+  }catch(error){
+    return resp.status(500).json({message:"internal server error"})
+  }
+}
 
 const deleteJob = async (req, res) => {
     const jobId = req.params.id;
@@ -178,5 +191,5 @@ const singleJob  =async(req,res)=>{
   }
 
 module.exports={
-    saveJob,findJob,deleteJob,updateJob,findJobByJobFeild,getAllJobs,singleJob,findJobByJobLocation,JobFind
+    saveJob,findJob,deleteJob,updateJob,findJobByJobFeild,getAllJobs,singleJob,findJobByJobLocation,JobFind,JobCount
 }

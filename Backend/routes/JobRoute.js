@@ -13,8 +13,8 @@ router.put('/update-job/:id',verifyToken,JobController.updateJob);
 router.delete('/delete-job/:id',verifyToken,JobController.deleteJob);
 router.get('/find-all-job-byjobfeild',JobController.findJobByJobFeild);
 router.get('/find-all-job-bylocation',verifyToken,JobController.findJobByJobLocation);
-// router.get('/find-all-customer',verifyToken,CustomerController.findAllCustomers);
 router.get('/user-find-job',JobController.JobFind);
+router.get('/total-job-count',JobController.JobCount);
 
 // User routes
 router.get('/get-all-jobs',JobController.getAllJobs);
