@@ -8,6 +8,8 @@ import { Button } from "react-bootstrap";
 const ReceivedCVs = () => {
   const [applications, setApplications] = useState([]);
   const { getToken } = useAuth();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [applicationsPerPage] = useState(8); // You can adjust the number of jobs per page here
 
   const fetchAllApplications = async () => {
     try {
@@ -44,6 +46,13 @@ const ReceivedCVs = () => {
     //console.log(applications);
   }, [applications]);
 
+   // Pagination logic
+   const indexOfLastApplication = currentPage * applicationsPerPage;
+   const indexOfFirstApplication = indexOfLastApplication - applicationsPerPage;
+   const currentApplication = applications.slice(indexOfFirstApplication, indexOfLastApplication);
+ 
+   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div>
       <br></br>
@@ -66,7 +75,7 @@ const ReceivedCVs = () => {
                 </tr>
               </thead>
               <tbody>
-                {applications.map((application, index) => (
+                {currentApplication.map((application, index) => (
                   <tr key={index}>
                     <th>{index + 1}</th>
                     <td>{application.jobField}</td>
@@ -108,6 +117,16 @@ const ReceivedCVs = () => {
               </tbody>
             </table>
           </div>
+          {/* Pagination */}
+          <ul className="pagination">
+            {Array.from({ length: Math.ceil(applications.length / applicationsPerPage) }, (_, i) => (
+              <li key={i} className={`page-item ${i + 1 === currentPage ? "active" : ""}`}>
+                <button className="page-link" onClick={() => paginate(i + 1)}>
+                  {i + 1}
+                </button>
+              </li>
+            ))}
+          </ul>
           </div>
       </Sidebar>
       <br></br>
