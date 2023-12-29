@@ -58,6 +58,21 @@ const getAllApplications =async (req,res)=>{
   }
 }
 
+
+
+const singleApplication = async (req, res) => {
+  const applicationId = req.params.id;
+  try {
+    const application = await JobApplication.findById(applicationId).lean();
+    if (!application) {
+      return res.status(404).json({ message: "Application Not Found!" });
+    }
+    res.status(200).json(application);
+  } catch (error) {
+    res.status(500).json({ message: "Error: " + error.message });
+  }
+};
+
 module.exports = {
-  saveApplication,getAllApplications
+  saveApplication,getAllApplications,singleApplication
 };

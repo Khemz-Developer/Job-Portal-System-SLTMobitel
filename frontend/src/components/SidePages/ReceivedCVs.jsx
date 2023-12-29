@@ -70,7 +70,7 @@ const ReceivedCVs = () => {
                   <th scope="col">Job Feild</th>
                   <th scope="col">Job Position</th>
                   <th scope="col">Email</th>
-                  <th scope="col">View Cv</th>
+                  <th className="px-4" scope="col">CV File</th>
                   <th scope="col">Manage User</th>
                 </tr>
               </thead>
@@ -106,7 +106,7 @@ const ReceivedCVs = () => {
                       >
                         Reject
                       </Button>
-                      <Link >
+                      <Link to={`view-application/${application._id}`} >
                         <Button variant="outline-info" className="btn m-2 ">
                           View
                         </Button>
@@ -129,18 +129,9 @@ const ReceivedCVs = () => {
           </ul>
           </div>
       </Sidebar>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+     
+      
+      
     </div>
   );
 };
