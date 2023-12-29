@@ -34,6 +34,28 @@ const ReceivedCVs = () => {
     }
   };
 
+  const handleDelete = async (appId)=>{
+    try{
+      const config ={
+        headers:{
+          Authorization:`Bearer ${getToken()}`,
+        },
+      };
+
+      const response = await axios.delete(
+        `http://localhost:3000/api/v1/applications/delete-single-applications/${appId}`,
+      config
+      );
+
+      if(response.status===200){
+        alert("Application Succesfully Deleted !");
+        fetchAllApplications();
+      }
+    }catch(error){
+      console.log(error);
+    }
+  };
+
   const handleViewPdf = (pdfLink) => {
     window.open(pdfLink, "_blank");
   };
@@ -102,7 +124,7 @@ const ReceivedCVs = () => {
                       <Button
                         variant="outline-danger"
                         className="btn "
-                        
+                        onClick={()=>handleDelete(application._id)}
                       >
                         Reject
                       </Button>
