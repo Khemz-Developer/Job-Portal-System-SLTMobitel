@@ -47,8 +47,37 @@ const saveApplication = (req, resp) => {
     });
 };
 
+const acceptApplication = async (req, res) => {
+  const applicationId = req.params.id;
 
+  try {
+    // Update application status to "Accepted" in the database
+    const updatedApplication = await JobApplication.findByIdAndUpdate(
+      applicationId,
+      { status: 'Accepted' },
+      { new: true }
+    );
 
+    if (!updatedApplication) {
+      return res.status(404).json({ message: 'Application Not Found!' });
+    }
+
+    res.status(200).json(updatedApplication);
+  } catch (error) {
+    res.status(500).json({ message: 'Error: ' + error.message });
+  }
+};
+
+const getAcceptedApplication = async (req,res)=>{
+  
+  try{
+    const AcceptedApplication = await JobApplication.find({status:'Accepted'});
+    res.status(200).json(AcceptedApplication);
+  }catch(error){
+    return res.status(500).json({message:"Error :"+ error.message});
+  }
+
+}
 const getAllApplications =async (req,res)=>{
   try{
     const applications =await JobApplication.find({});
@@ -88,5 +117,5 @@ const singleApplication = async (req, res) => {
 };
 
 module.exports = {
-  saveApplication,getAllApplications,singleApplication,deleteApplication
+  saveApplication,getAllApplications,singleApplication,deleteApplication,acceptApplication,getAcceptedApplication
 };
