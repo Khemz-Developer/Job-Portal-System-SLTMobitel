@@ -10,6 +10,7 @@ const ReceivedCVs = () => {
   const { getToken } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [applicationsPerPage] = useState(8); // You can adjust the number of jobs per page here
+  const [acceptedApplications, setAcceptedApplications] = useState([]);
 
   const fetchAllApplications = async () => {
     try {
@@ -56,6 +57,36 @@ const ReceivedCVs = () => {
     }
   };
 
+  const handleAccept = async (appId) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      };
+  
+      // Send request to mark application as accepted
+      const response = await axios.post(
+        `http://localhost:3000/api/v1/applications/accept/${appId}`,
+        {},
+        config
+      );
+  
+      if (response.status === 200) {
+        // Remove accepted application from applications state
+        const updatedApplications = applications.filter(
+          (application) => application._id !== appId
+        );
+        setApplications(updatedApplications);
+  
+        // Add the accepted application to the acceptedApplications state
+        setAcceptedApplications([...acceptedApplications, response.data]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   const handleViewPdf = (pdfLink) => {
     window.open(pdfLink, "_blank");
   };
@@ -117,6 +148,7 @@ const ReceivedCVs = () => {
                         <Button
                           variant="outline-secondary"
                           className="btn mx-2 "
+                          onClick={()=>handleAccept(application._id)}
                         >
                           Accept
                         </Button>

@@ -58,6 +58,11 @@ const JobApplySchema = new mongoose.Schema({
       experience: String,
     },
   ],
+  status: {
+    type: String,
+    enum: ["Pending", "Accepted", "Rejected"], // Add enum for predefined status values
+    default: "Pending", // Set a default status if needed
+  },
   
 });
 
