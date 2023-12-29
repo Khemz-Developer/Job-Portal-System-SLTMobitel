@@ -58,7 +58,21 @@ const getAllApplications =async (req,res)=>{
   }
 }
 
+const deleteApplication = async (req, res)=>{
+  ApplicationId = req.params.id;
 
+  try{
+    const deleteApp = await JobApplication.findByIdAndDelete(ApplicationId);
+  if(!deleteApp){
+    return res.status(404).json({message:" Application Not Found!"});
+
+  }else{
+    return res.status(200).json({message:" Application was deleted"});
+  }
+  }catch(error){
+    return res.status(500).json({message :"Error :"+error});
+  }
+}
 
 const singleApplication = async (req, res) => {
   const applicationId = req.params.id;
@@ -74,5 +88,5 @@ const singleApplication = async (req, res) => {
 };
 
 module.exports = {
-  saveApplication,getAllApplications,singleApplication
+  saveApplication,getAllApplications,singleApplication,deleteApplication
 };

@@ -12,5 +12,6 @@ router.post('/save-application',verifyController,JobApplyController.saveApplicat
 
 //Admin Job Application Received Part
 router.get('/get-all-applications',verifyController,JobApplyController.getAllApplications);
+router.delete('/delete-single-applications/:id',verifyController,JobApplyController.deleteApplication);
 router.get('/:id',JobApplyController.singleApplication);
 module.exports=router;
