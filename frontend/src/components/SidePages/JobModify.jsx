@@ -29,6 +29,7 @@ const JobModify = () => {
         config
       );
       setJobs(response.data);
+     
     } catch (error) {
       alert("You must Login First!");
       console.log(error);
@@ -163,7 +164,7 @@ const JobModify = () => {
                       >
                         Delete
                       </Button>
-                      <Link to={`view-user/${job._id}`}>
+                      <Link to={`view-job/${job._id}`}>
                         <Button variant="outline-info" className="btn m-2 ">
                           View
                         </Button>

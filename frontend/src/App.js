@@ -19,6 +19,7 @@ import UserVacancy from "./components/usersidepages/UserVacancy";
 import JobUpdate from "./components/SidePages/JobUpdate";
 import View from "./components/SidePages/View";
 import UserJobView from "./components/usersidepages/UserJobView";
+import ViewApplication from "./components/SidePages/ViewApplication";
 
 function App() {
   return (
@@ -47,8 +48,12 @@ function App() {
                 element={<JobUpdate />}
               />
               <Route
-                path="/modification/view-user/:id"
+                path="/modification/view-job/:id"
                 element={<View />}
+              />
+              <Route
+                path="/received/view-application/:id"
+                element={<ViewApplication/>}
               />
 
               {/*ROUTE FOR USER PAGES*/}
