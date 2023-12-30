@@ -18,14 +18,14 @@ const About = () => {
         </p>
       </div>
       <div className="row pt-5  ">
-        <div className="image-about col col-md-12 col-sm-12 col-lg-6">
+        <div className="image-about col col-md-12 col-sm-12  col-lg-6">
           <img
-            className="image-about col-md-8 col-sm-8 col-lg-10"
+            className="image-about col-md-8 col-sm-8 col-lg-10 "
             src="https://www.myjobgator.com/assets/img/career.jpg"
             alt=""
           />
         </div>
-        <div className="col mt-5 pt-3">
+        <div className="col mt-5 pt-3 ">
           <h2 className="Main-Topic-2">Advance your career with SLTMobitel</h2>
           <p className="paragraph-2">
             Create a free account, complete your profile, and get matched with

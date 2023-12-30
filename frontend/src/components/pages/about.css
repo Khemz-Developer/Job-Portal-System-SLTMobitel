@@ -86,6 +86,15 @@
   display: inline-block; /* Set display to inline-block */
 }
 
+@media (max-width: 575px) {
+
+  .image-about {
+    display: none !important;
+  }
+
+  
+}
+
 @media(max-width:768px) {
   .image-about{
     display: block;
@@ -138,26 +147,26 @@
 @media (min-width: 992px) and (max-width: 1199px) {
   /* Styles specific to LG */
   .Main-Topic {
-    /* Adjust styles for Main-Topic in LG */
+    text-align:center ;
+    margin-top: 20px;
+    margin-left:20px ;
   }
 
   .image-about {
-    /* Adjust styles for image-about in LG */
+    display: block;
+    width: 100%; /* Take full width */
+    margin: 0 auto; /* Center the image */
   }
-
-  /* Add more styles as needed for LG */
+  .Main-Topic-2{
+    
+    text-align: start;
+    margin-top: 20px;
+    margin-left: 0;
+    margin-top: -40px;
+    
+  }
+  .paragraph-2{
+    text-align: start;
+  }
 }
 
-/* Extra Large (XL) - 1200px and above */
-@media (min-width: 1200px) {
-  /* Styles specific to XL */
-  .Main-Topic {
-    /* Adjust styles for Main-Topic in XL */
-  }
-
-  .image-about {
-    /* Adjust styles for image-about in XL */
-  }
-
-  /* Add more styles as needed for XL */
-}

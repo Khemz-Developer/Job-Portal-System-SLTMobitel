@@ -1,3 +1,97 @@
+/* .outer-div-footer {
+  background-color: aliceblue;
+  padding: 10px;
+}
+
+.lower-div {
+  background-color: rgb(206, 203, 203);
+}
+ul li a {
+  text-decoration: none;
+  display: block;
+  padding-top: 10px;
+  color: black;
+}
+
+.link-div {
+  text-align: left !important;
+  padding-left: 80px;
+}
+
+.link-div1 {
+  text-align: left !important;
+  padding-left: 50px;
+}
+.h5-topic0{
+  padding-right:150px ;
+}
+.h5-topic1 {
+  padding-right: 145px;
+}
+
+.h5-topic2 {
+  padding-right: 180px;
+}
+.link-div2 {
+  text-align: left !important;
+  padding-left: 30px;
+}
+.link-div3 li {
+  display: flex;
+  align-items: center;
+}
+
+.link-div3 {
+  text-align: left !important;
+  text-decoration: none;
+  padding-left: 7px;
+}
+
+.link-div3 a {
+  text-decoration: none;
+  color: black;
+  padding: 10;
+  font-weight: 600;
+}
+.h5-topic3 {
+  padding-right: 120px;
+}
+
+.bottom-word {
+  color: aliceblue;
+}
+.icons{
+    
+    margin-right: 20px;
+    padding-left: 10px;
+    
+    
+}
+
+@media (max-width: 768px) {
+  .link-div,
+  .link-div1,
+  .link-div2,
+  .link-div3,
+  .h5-topic0,
+  .h5-topic1,
+  .h5-topic2,
+  .h5-topic3 {
+    padding-right: 0;
+    align-items: center;
+    text-align: center !important;
+  }
+
+  .icons {
+    margin-right: 10px;
+    padding-left: 5px;
+  }
+  
+  .link-div3{
+    text-align: center !important;
+  }
+} */
+
 .outer-div-footer {
   background-color: aliceblue;
   padding: 10px;
@@ -83,8 +177,46 @@ ul li a {
     padding-right: 0;
   }
 
+  .link-div,
+  .link-div1,
+  .link-div2,
+  .link-div3,
+  .h5-topic0,
+  .h5-topic1,
+  .h5-topic2,
+  .h5-topic3,
+  .clearfix {
+    display: none;
+  }
+
   .icons {
     margin-right: 10px;
     padding-left: 5px;
   }
 }
+
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+  /* Styles specific to MD */
+  .link-div,
+  .link-div1,
+  .link-div2,
+  .link-div3,
+  .h5-topic0,
+  .h5-topic1,
+  .h5-topic2,
+  .h5-topic3,
+  
+  .clearfix {
+    display: none;
+
+  }
+
+
+  /* Add more styles as needed for MD */
+}
+
+
+
+

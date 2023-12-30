@@ -115,7 +115,7 @@ const JobModify = () => {
       <br></br>
       <br></br>
       <Sidebar>
-        <h3>Job Modifification Form</h3>
+        <h3 className="text-center mt-3">Job Modifification Form</h3>
         {/* Search Bar Component */}
         <div className="row">
           <div className="col-md-6 ">

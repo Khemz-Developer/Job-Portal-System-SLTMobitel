@@ -80,7 +80,7 @@ const AcceptedCVs = () => {
             className="col-6 m-3 search-bar"
             type="text"
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search by Job Field, Job Position, Location"
+            placeholder="Search by Job Field, Job Position..."
           />
           <button onClick={handleSearch} className="col-1 m-3 searchbutton" type="">
             SEARCH

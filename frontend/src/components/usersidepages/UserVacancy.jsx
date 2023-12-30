@@ -80,7 +80,7 @@ const UserVacancy = () => {
         <div className="row">
              {/* <div className="Right-side col "> */}
             {currentJobs.map((job, index) => (
-              <div key={job._id} className="col-md-3 mb-4">
+              <div key={job._id} className="col-sm-12 col-md-6 col-lg-6 col-xl-3  mb-4">
               <JobCard
                 key={job._id}
                 jobField={job.jobField}

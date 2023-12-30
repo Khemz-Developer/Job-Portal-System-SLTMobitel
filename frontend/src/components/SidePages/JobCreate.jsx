@@ -67,7 +67,7 @@ const JobCreate = () => {
       <br></br>
       <br></br>
       <Sidebar>
-        <h3>Job Create Form</h3>
+        <h3 className="text-center m-4">Job Create Form</h3>
         <div className="">
           <Form className="card" onSubmit={handleSubmit}>
             <h3 className="font-bold h3font">Create New Job!</h3>

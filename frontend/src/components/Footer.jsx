@@ -8,7 +8,7 @@ const Footer = () => {
     <div>
       <div className="container-fluid text-center text-md-left outer-div-footer pt-3">
         <div className="row">
-          <div className="col-md-4 mt-md-0 mt-3">
+          <div className="col-lg-4 col-md-12 mt-md-0 mt-3 sltmobitel-div">
             <h5 className="text-uppercase">SLTMOBITEL</h5>
             {/* <p>Here you can use rows and columns to organize your footer content.</p> */}
             <Row className="p-2 ">
@@ -30,9 +30,9 @@ const Footer = () => {
 
           <hr className="clearfix w-100 d-md-none pb-0" />
 
-          <div className="col-md-2 mb-md-0 mb-3 ">
-            <h5 className="text-uppercase h5-topic0">TELEPHONE</h5>
-            <ul className="list-unstyled link-div">
+          <div className="col-lg-2  mb-md-0 mb-3 telephone-div ">
+            <h5 className="text-uppercase  h5-topic0">TELEPHONE</h5>
+            <ul className="list-unstyled  link-div">
               <li>
                 <a href="#!">Fibre</a>
               </li>
@@ -48,7 +48,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-md-2 mb-md-0 mb-3">
+          <div className="col-lg-2 col-md-12 mb-md-0 mb-3 broadband-div" >
             <h5 className="text-uppercase h5-topic1">BROADBAND</h5>
             <ul className="list-unstyled link-div1">
               <li>
@@ -65,7 +65,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-2 mb-md-0 mb-3">
+          <div className="col-lg-2 col-md-12 mb-md-0 mb-3 peotv-div">
             <h5 className="text-uppercase h5-topic2">PEO TV</h5>
             <ul className="list-unstyled link-div2">
               <li>
@@ -79,7 +79,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-2 mb-md-0 mb-3 ">
+          <div className=" col-lg-2 col-md-6  mb-md-0 mb-3 contactus-div">
             <h5 className="text-uppercase h5-topic3">Contact US</h5>
             <div className=" link-div3">
               <p className="pt-2">

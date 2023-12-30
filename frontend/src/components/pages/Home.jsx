@@ -43,7 +43,7 @@ const Home = () => {
       <h1 className="active-jobs">{jobcount} Active Local Jobs Found !</h1>
       
       <SliderComponent jobFields={totaljobFeilds} />
-      <br /> <br /> <br /> <br />
+      <br /> <br /> <br /> <br /> 
       <Footer />
     </div>
   );
