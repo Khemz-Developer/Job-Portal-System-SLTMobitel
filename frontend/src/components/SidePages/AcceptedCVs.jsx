@@ -13,7 +13,7 @@ const AcceptedCVs = () => {
   const { getToken } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [applicationsPerPage] = useState(5); // You can adjust the number of jobs per page here
- 
+  const [searchTerm, setSearchTerm] = useState('');
   
    // Pagination logic
    const indexOfLastApplication = currentPage * applicationsPerPage;
@@ -21,6 +21,22 @@ const AcceptedCVs = () => {
    const currentApplication = acceptedApplications.slice(indexOfFirstApplication, indexOfLastApplication);
  
    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+   const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/v1/applications/admin-find-applicant", // address need to chnage
+        {
+          headers: {
+            searchterm: searchTerm,
+          },
+        }
+      );
+      setAcceptedApplications(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const fetchAcceptedApplications = async () => {
@@ -55,7 +71,23 @@ const AcceptedCVs = () => {
         <br></br>
         <br></br>
      <Sidebar>
-      <h3>Accepted CVs</h3>
+      <h3 className='text-center mt-2'>Accepted CVs</h3>
+      
+      <div className="search-options  mt-5">
+      
+        <div className="row my-4">
+          <input
+            className="col-6 m-3 search-bar"
+            type="text"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search by Job Field, Job Position, Location"
+          />
+          <button onClick={handleSearch} className="col-1 m-3 searchbutton" type="">
+            SEARCH
+          </button>
+        </div>
+      </div>
+
       <div className="container modi-container  pt-5">
           <div className="">
             <table className="table table-hover">

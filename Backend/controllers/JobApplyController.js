@@ -3,7 +3,7 @@ const JobApplication = require("../models/JobApplySchema");
 
 const saveApplication = (req, resp) => {
   // Create a new Job instance using the data from the request body
-  console.log(req.body);
+  //console.log(req.body);
   const {
     jobField,
     jobPosition,
@@ -116,6 +116,40 @@ const singleApplication = async (req, res) => {
   }
 };
 
+//----- Admin Search Application Part In ReceivedCV.jsx page
+
+
+
+  const ApplicantFind = (req, resp) => {
+    const searchTerm = req.headers.searchterm;
+    const searchRegex = new RegExp(searchTerm, 'i');
+  
+    JobApplication.find({
+      $or: [
+        { jobField: searchRegex },
+        { jobPosition: searchRegex },
+      ],
+    })
+      .then((result) => {
+        if (result.length === 0) {
+          resp.status(404).json({ status: false, message: "Applicant Not Found !" });
+        } else {
+          resp.status(200).json({ status: true, data: result });
+        }
+      })
+      .catch((error) => {
+        resp.status(500).json({ message: error });
+      });
+  };
+
+  
+
+
 module.exports = {
-  saveApplication,getAllApplications,singleApplication,deleteApplication,acceptApplication,getAcceptedApplication
+  saveApplication,
+  getAllApplications,
+  singleApplication,deleteApplication,
+  acceptApplication,
+  getAcceptedApplication,
+  ApplicantFind
 };

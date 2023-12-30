@@ -55,6 +55,10 @@ function App() {
                 path="/received/view-application/:id"
                 element={<ViewApplication/>}
               />
+               <Route
+                path="/accept/view-application/:id"
+                element={<ViewApplication/>}
+              />
 
               {/*ROUTE FOR USER PAGES*/}
               <Route path="/uservacancy" element={<UserVacancy />} />

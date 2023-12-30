@@ -9,9 +9,10 @@ const ReceivedCVs = () => {
   const [applications, setApplications] = useState([]);
   const { getToken } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
-  const [applicationsPerPage] = useState(8); // You can adjust the number of jobs per page here
+  const [applicationsPerPage] = useState(6); // You can adjust the number of jobs per page here
   const [acceptedApplications, setAcceptedApplications] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState('');
+  
   const fetchAllApplications = async () => {
     try {
       const config = {
@@ -91,6 +92,23 @@ const ReceivedCVs = () => {
     window.open(pdfLink, "_blank");
   };
   
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/v1/applications/admin-find-applicant", // address need to chnage
+        {
+          headers: {
+            searchterm: searchTerm,
+          },
+        }
+      );
+      setApplications(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchAllApplications();
   }, [getToken]);
@@ -112,7 +130,23 @@ const ReceivedCVs = () => {
       <br></br>
       <br></br>
       <Sidebar>
-        <h3> Received CVs</h3>
+        <h3 className="text-center mt-3"> Applications Received </h3>
+        
+      
+      <div className="search-options  mt-3">
+      
+        <div className="row my-2">
+          <input
+            className="col-6 m-3 search-bar"
+            type="text"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search by Job Field, Job Position..."
+          />
+          <button onClick={handleSearch} className="col-1 m-3 searchbutton" type="">
+            SEARCH
+          </button>
+        </div>
+      </div>
         {/*table */}
         <div className="container modi-container  pt-5">
           <div className="">

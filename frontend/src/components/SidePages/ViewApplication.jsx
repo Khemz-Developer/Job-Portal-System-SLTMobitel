@@ -9,7 +9,7 @@ const ViewApplication = () => {
   useEffect(() => {
     // Make a request for a user with a given ID
     axios
-      .get(`http://localhost:3000/api/v1/applications/${id}`)
+      .get(`http://localhost:3000/api/v1/applications/view-single-application/${id}`)
       .then((response) => {
         // handle success
         setApplication(response.data);
