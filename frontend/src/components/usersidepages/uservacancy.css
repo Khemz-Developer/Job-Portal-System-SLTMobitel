@@ -86,15 +86,3 @@
 }
 
 /* Extra Large (XL) - 1200px and above */
-@media (min-width: 1200px) {
-  /* Styles specific to XL */
-  .Main-Topic {
-    /* Adjust styles for Main-Topic in XL */
-  }
-
-  .image-about {
-    /* Adjust styles for image-about in XL */
-  }
-
-  /* Add more styles as needed for XL */
-}

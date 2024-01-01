@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./UserJobApply.css";
 import axios from "axios";
 import { useAuth } from "../pages/Authcontext";
+
 import {
   getStorage,
   ref,
@@ -26,7 +27,7 @@ const UserJopApply = () => {
   const jobField = params.get("jobField");
   const jobPosition = params.get("jobPosition");
   const navigate = useNavigate(); // Add this line
-  const { getToken } = useAuth(); // Use the getToken function from the useAuth hook
+  const { isLoggedIn, getToken } = useAuth(); // Use the getToken function from the useAuth hook
 
   const [activities, setActivities] = useState([{ name: "", experience: "" }]);
 
@@ -48,7 +49,7 @@ const UserJopApply = () => {
   const uploadFile = (file, fileType) => {
     const storage = getStorage(app);
     const folder = "pdfs/"; // Choose the appropriate folder
-    
+
     //----------
     // Generate a unique identifier using timestamp and a random string
     const uniqueIdentifier =
@@ -216,12 +217,27 @@ const UserJopApply = () => {
       });
   };
 
+  // useEffect(() => {
+  //   // Check if jobField or jobPosition is missing
+  //   if (!jobField || !jobPosition) {
+  //     navigate("/uservacancy");
+  //   }
+  // }, [jobField, jobPosition, navigate]);
+
   useEffect(() => {
+    // Check if the user is not logged in
+    if (!isLoggedIn) {
+      // Show an alert
+      alert("Before Apply Vacancies, Please log in first ");
+      // Redirect to the login page
+      navigate("/login");
+    }
+
     // Check if jobField or jobPosition is missing
     if (!jobField || !jobPosition) {
       navigate("/uservacancy");
     }
-  }, [jobField, jobPosition, navigate]);
+  }, [isLoggedIn, jobField, jobPosition, navigate]);
 
   return (
     <div>
@@ -258,14 +274,13 @@ const UserJopApply = () => {
               </Form.Group>
             </div>
             <Form.Group className="mb-3 col-6" controlId="formFullName">
-                <Form.Label>Full Name :</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Name Of the Applicant"
-                  name="nameofApplicant"
-                  
-                />
-              </Form.Group>
+              <Form.Label>Full Name :</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Name Of the Applicant"
+                name="nameofApplicant"
+              />
+            </Form.Group>
             {/* pdf */}
             <Form.Group className="mb-3 col-12" controlId="formResume">
               <Form.Label>Resume (PDF)</Form.Label>

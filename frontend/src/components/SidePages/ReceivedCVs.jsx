@@ -2,17 +2,26 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar";
 import axios from "axios";
 import { useAuth } from "../pages/Authcontext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 const ReceivedCVs = () => {
+
   const [applications, setApplications] = useState([]);
-  const { getToken } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
   const [applicationsPerPage] = useState(6); // You can adjust the number of jobs per page here
   const [acceptedApplications, setAcceptedApplications] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  
+  const { isLoggedIn, getToken } = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Check if the user is not logged in when the component mounts
+    if (!isLoggedIn) {
+      alert("Please log in first");
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
+
   const fetchAllApplications = async () => {
     try {
       const config = {
@@ -192,7 +201,7 @@ const ReceivedCVs = () => {
                         className="btn "
                         onClick={()=>handleDelete(application._id)}
                       >
-                        Reject
+                        Delete
                       </Button>
                       <Link to={`view-application/${application._id}`} >
                         <Button variant="outline-info" className="btn m-2 ">

@@ -1,6 +1,7 @@
 
 //database ake table ke hadnn ynne
 const mongoose = require("mongoose");
+
 const JobSchema = new mongoose.Schema({
   
   jobField: {

@@ -17,9 +17,14 @@ router.get('/find-all-job-bylocation',verifyToken,JobController.findJobByJobLoca
 router.get('/user-find-job',JobController.JobFind);
 router.get('/total-job-count',JobController.JobCount);
 router.get('/get-all-jobs-Feilds',JobController.getUniqueJobFields);
+
+
 // User routes
 router.get('/get-all-jobs',JobController.getAllJobs);
 router.get('/:id',JobController.singleJob);
+
+
+
 
 
 module.exports=router;

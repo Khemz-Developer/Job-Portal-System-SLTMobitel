@@ -16,9 +16,9 @@ const Home = () => {
         "http://localhost:3000/api/v1/jobs/get-all-jobs-Feilds"
       );
       setJobFeilds(response.data.jobFields); // Update this line
-      console.log(response.data.jobFields);
+      //console.log(response.data.jobFields);
     } catch (error) {
-      console.log("Error fetching data:", error);
+      //console.log("Error fetching data:", error);
     }
   };
 
@@ -27,7 +27,7 @@ const Home = () => {
       "http://localhost:3000/api/v1/jobs/total-job-count"
     );
     setjobcount(jobCount.data);
-    console.log(jobCount);
+    //console.log(jobCount);
     //console.log(jobCount.data);
   };
 

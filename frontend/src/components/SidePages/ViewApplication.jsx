@@ -9,11 +9,13 @@ const ViewApplication = () => {
   useEffect(() => {
     // Make a request for a user with a given ID
     axios
-      .get(`http://localhost:3000/api/v1/applications/view-single-application/${id}`)
+      .get(
+        `http://localhost:3000/api/v1/applications/view-single-application/${id}`
+      )
       .then((response) => {
         // handle success
         setApplication(response.data);
-       // console.log(response.data);
+        // console.log(response.data);
       })
       .catch(function (error) {
         // handle error
@@ -47,9 +49,15 @@ const ViewApplication = () => {
             <span className="fontTitle">Mobile Number :</span>{" "}
             {application.mobileNumber}
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <span className="fontTitle">Date of Birth :</span>{" "}
             {application.dateofBirth}
+          </div> */}
+          <div className="mb-4">
+            <span className="fontTitle">Date of Birth :</span>{" "}
+            {application.dateofBirth
+              ? new Date(application.dateofBirth).toLocaleDateString()
+              : "N/A"}
           </div>
           <div className="mb-4">
             <span className="fontTitle">Nic :</span> {application.nic}
@@ -60,8 +68,24 @@ const ViewApplication = () => {
           <div className="mb-4">
             <span className="fontTitle">Address :</span> {application.address}
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <span className="fontTitle">Skills :</span> {application.skills}
+          </div> */}
+          <div className="mb-4">
+            <span className="fontTitle">Skills :</span>
+            {Array.isArray(application.skills) ? (
+              <ul className="mx-3">
+                {application.skills.map((skill, index) => (
+                  <li key={index}>{skill.trim()}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>
+                {typeof application.skills === "string"
+                  ? application.skills
+                  : "No skills available"}
+              </p>
+            )}
           </div>
 
           <div className="mb-4">
@@ -95,23 +119,20 @@ const ViewApplication = () => {
             )}
           </div>
           <div className="mb-4">
-          <span className="fontTitle">Extra Curricular Activites : </span>
-          {application.activities && application.activities.length>0 ? (
-            <ul className="mx-3">
-              {application.activities.map((result,index)=>(
-                <li key={index}>
-                  <span>{result.name} :</span> {result.experience}
-                </li>
-              ))}
-            </ul>
-          ):(
-            <p>No A/L results available</p>
-            )
-          }
-         
+            <span className="fontTitle">Extra Curricular Activites : </span>
+            {application.activities && application.activities.length > 0 ? (
+              <ul className="mx-3">
+                {application.activities.map((result, index) => (
+                  <li key={index}>
+                    <span>{result.name} :</span> {result.experience}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No A/L results available</p>
+            )}
           </div>
 
-          
           <Link
             to="/received"
             className="px-4 py-2 text-sm btn btn-outline-secondary mb-3 back-button"
