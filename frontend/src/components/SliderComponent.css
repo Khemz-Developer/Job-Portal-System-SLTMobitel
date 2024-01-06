@@ -1,0 +1,27 @@
+
+h3{
+   
+    color: rgb(0,85,163);
+    opacity: 80%;
+    font-size: 1.6rem; /* Default font size for larger screens */
+  
+    @media (max-width: 1200px) {
+      font-size: 1.8.rem; /* Adjust font size for screens up to 1200px */
+    }
+  
+    @media (max-width: 992px) {
+      font-size: 1.6rem; /* Adjust font size for screens up to 992px */
+    }
+  
+    @media (max-width: 768px) {
+      font-size: 1.5rem; /* Adjust font size for screens up to 768px */
+    }
+  
+    /* Add more media queries as needed for smaller screens */
+  }
+
+  h2{
+    
+    color: rgb(78, 80, 82);
+    opacity: 80%;
+  }

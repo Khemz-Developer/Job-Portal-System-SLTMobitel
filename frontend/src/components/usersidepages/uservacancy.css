@@ -1,25 +1,89 @@
-
-
-.search-options{
-    background-color: #F2F6FF;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-
+.search-options {
+  background-color: #f2f6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.search-bar{
-    height: 60px;
-    width: 800px;
-    border-radius: 5px;
-    border: none;
+.search-bar {
+  height: 60px;
+  width: 800px;
+  border-radius: 5px;
+  border: none;
 }
 
-.searchbutton{
-    height: 60px;
-    width: 300px !important;
-    border-radius: 5px;
-    background-color: rgb(245, 85, 85);
-    border: none;
-    color: #F2F6FF;
-    font-size: 26px;
+.searchbutton {
+  height: 60px;
+  width: 300px !important;
+  border-radius: 5px;
+  background-color: rgb(245, 85, 85);
+  border: none;
+  color: #f2f6ff;
+  font-size: 26px;
 }
+
+@media (max-width: 575px) {
+  .search-options {
+    display: none;
+  }
+}
+
+/* Small (SM) - 576px to 767px */
+@media (min-width: 576px) and (max-width: 767px) {
+  .search-options {
+    flex-direction: column;
+    align-items: center !important;
+    margin: 20px;
+}
+
+.searchbutton {
+    margin-right: 10px !important;
+    display: block;
+    width: 120px !important; /* Adjusted button width */
+    margin: 10px auto;
+}
+
+.search-bar {
+    margin-left: 0px;
+    width: 400px; /* Adjusted search bar width */
+}
+}
+
+/* Medium (MD) - 768px to 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+  .search-options {
+    flex-direction: column; /* Change flex direction to column */
+    align-items: center !important;
+    margin: 20px;
+  }
+  .searchbutton {
+    display: block;
+    margin: 10px auto; /* Adjust margin to center the button */
+  }
+    
+  
+  .search-bar{
+    margin-left: 0px;
+    width: 700px;
+  }
+}
+
+/* Large (LG) - 992px to 1199px */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .search-options {
+        flex-direction: column; /* Change flex direction to column */
+        align-items: center !important;
+        margin: 20px;
+      }
+      .searchbutton {
+        display: block;
+        margin: 10px auto; /* Adjust margin to center the button */
+      }
+        
+      
+      .search-bar{
+        margin-left: 0px;
+        width: 700px;
+      }
+}
+
+/* Extra Large (XL) - 1200px and above */

@@ -5,9 +5,7 @@ import Navbar from "./components/Navbar";
 import About from "./components/pages/About";
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
-
 import { AuthProvider } from "../src/components/pages/Authcontext";
-// import Footer from "./components/Footer";
 import AcceptedCVs from "./components/SidePages/AcceptedCVs";
 import JobCreate from "./components/SidePages/JobCreate";
 import JobModify from "./components/SidePages/JobModify";
@@ -20,6 +18,7 @@ import JobUpdate from "./components/SidePages/JobUpdate";
 import View from "./components/SidePages/View";
 import UserJobView from "./components/usersidepages/UserJobView";
 import ViewApplication from "./components/SidePages/ViewApplication";
+import RoleManagement from "./components/SidePages/RoleManagement";
 
 function App() {
   return (
@@ -43,6 +42,7 @@ function App() {
               <Route path="/modification" element={<JobModify />} />
               <Route path="/accept" element={<AcceptedCVs />} />
               <Route path="/received" element={<ReceivedCVs />} />
+              <Route path="/role" element={<RoleManagement/>} />
               <Route
                 path="/modification/jobupdate/:id"
                 element={<JobUpdate />}
@@ -53,6 +53,10 @@ function App() {
               />
               <Route
                 path="/received/view-application/:id"
+                element={<ViewApplication/>}
+              />
+               <Route
+                path="/accept/view-application/:id"
                 element={<ViewApplication/>}
               />
 

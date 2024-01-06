@@ -1,9 +1,10 @@
 
+const JobApplySchema = require("../models/JobApplySchema");
 const JobApplication = require("../models/JobApplySchema");
-
+const nodemailer=require('nodemailer');
 const saveApplication = (req, resp) => {
   // Create a new Job instance using the data from the request body
-  console.log(req.body);
+  //console.log(req.body);
   const {
     jobField,
     jobPosition,
@@ -34,18 +35,52 @@ const saveApplication = (req, resp) => {
     alResults,
     skills,
     activities,
-  
   });
-
-  tempApplication.save()
+  
+ 
+  // Save the application to the database
+  tempApplication
+    .save()
     .then((result) => {
-      resp.status(201).json({ status: true, message: 'Application was saved!' });
+      // Send email notification to the user
+      sendApplicationConfirmationEmail(email, nameofApplicant,jobField);
+
+      // Respond with a success message
+      resp.status(201).json({ status: true, message: "Application was saved!" });
     })
     .catch((error) => {
       console.error(error);
       resp.status(500).json(error);
     });
 };
+
+// Function to send an email confirmation to the user
+const sendApplicationConfirmationEmail = (userEmail, userName,jobtitle) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "jalithakheminda@gmail.com",  // replace with your email
+      pass: "ormb vhrl rmrv wuxl",   // replace with your email password
+    },
+  });
+
+  const mailOptions = {
+    from: "jalithakheminda@gmail.com",
+    to: userEmail,
+    subject: "Job Application Submitted Successfully",
+    text: `Dear ${userName},\n\nThank you for submitting your job application regarding ${jobtitle} feild. We have received your application and will review it shortly.\n\nBest regards,\nSLT Mobitel`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+};
+
+
 
 const acceptApplication = async (req, res) => {
   const applicationId = req.params.id;
@@ -54,54 +89,56 @@ const acceptApplication = async (req, res) => {
     // Update application status to "Accepted" in the database
     const updatedApplication = await JobApplication.findByIdAndUpdate(
       applicationId,
-      { status: 'Accepted' },
+      { status: "Accepted" },
       { new: true }
     );
 
     if (!updatedApplication) {
-      return res.status(404).json({ message: 'Application Not Found!' });
+      return res.status(404).json({ message: "Application Not Found!" });
     }
 
     res.status(200).json(updatedApplication);
   } catch (error) {
-    res.status(500).json({ message: 'Error: ' + error.message });
+    res.status(500).json({ message: "Error: " + error.message });
   }
 };
 
-const getAcceptedApplication = async (req,res)=>{
-  
-  try{
-    const AcceptedApplication = await JobApplication.find({status:'Accepted'});
+const getAcceptedApplication = async (req, res) => {
+  try {
+    const AcceptedApplication = await JobApplication.find({
+      status: "Accepted",
+    });
     res.status(200).json(AcceptedApplication);
-  }catch(error){
-    return res.status(500).json({message:"Error :"+ error.message});
+  } catch (error) {
+    return res.status(500).json({ message: "Error :" + error.message });
   }
+};
 
-}
-const getAllApplications =async (req,res)=>{
-  try{
-    const applications =await JobApplication.find({});
+
+const getAllApplications = async (req, res) => {
+  try {
+    const applications = await JobApplication.find({ status: "Pending" });
     res.status(200).json(applications);
-  }catch{
-    res.status(500).json({message:"Error:"+error.message});
+  } catch (error) {
+    res.status(500).json({ message: "Error: " + error.message });
   }
-}
+};
 
-const deleteApplication = async (req, res)=>{
+
+const deleteApplication = async (req, res) => {
   ApplicationId = req.params.id;
 
-  try{
+  try {
     const deleteApp = await JobApplication.findByIdAndDelete(ApplicationId);
-  if(!deleteApp){
-    return res.status(404).json({message:" Application Not Found!"});
-
-  }else{
-    return res.status(200).json({message:" Application was deleted"});
+    if (!deleteApp) {
+      return res.status(404).json({ message: " Application Not Found!" });
+    } else {
+      return res.status(200).json({ message: " Application was deleted" });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Error :" + error });
   }
-  }catch(error){
-    return res.status(500).json({message :"Error :"+error});
-  }
-}
+};
 
 const singleApplication = async (req, res) => {
   const applicationId = req.params.id;
@@ -116,6 +153,71 @@ const singleApplication = async (req, res) => {
   }
 };
 
+//----- Admin Search Application Part In ReceivedCV.jsx page
+
+const ApplicantFind = (req, resp) => {
+  const searchTerm = req.headers.searchterm;
+  const searchRegex = new RegExp(searchTerm, "i");
+
+  JobApplication.find({
+    $or: [{ jobField: searchRegex }, { jobPosition: searchRegex }],
+  })
+    .then((result) => {
+      if (result.length === 0) {
+        resp
+          .status(404)
+          .json({ status: false, message: "Applicant Not Found !" });
+      } else {
+        resp.status(200).json({ status: true, data: result });
+      }
+    })
+    .catch((error) => {
+      resp.status(500).json({ message: error });
+    });
+};
+
+const ReceivedApplicationCount = async(req,resp)=>{
+  try{
+   const count =await JobApplySchema.countDocuments({status: "Pending"});
+   resp.status(200).json({ count });
+
+  }catch(error){
+    return resp.status(500).json({message:"internal server error"})
+  }
+}
+const AccepttedApplicationCount = async(req,resp)=>{
+  try{
+   const count =await JobApplySchema.countDocuments({status: "Accepted"});
+   resp.status(200).json({ count });
+
+  }catch(error){
+    return resp.status(500).json({message:"internal server error"})
+  }
+}
+
+const getApplicationsByEmail = async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    // Use your model to find applications by email
+    const applications = await JobApplication.find({ email });
+
+    res.json({ applications });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
-  saveApplication,getAllApplications,singleApplication,deleteApplication,acceptApplication,getAcceptedApplication
+  saveApplication,
+  getAllApplications,
+  singleApplication,
+  deleteApplication,
+  acceptApplication,
+  getAcceptedApplication,
+  ApplicantFind,
+  ReceivedApplicationCount,
+  AccepttedApplicationCount,
+  getApplicationsByEmail
 };

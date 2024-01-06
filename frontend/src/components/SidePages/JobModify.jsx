@@ -6,6 +6,7 @@ import { useAuth } from "../pages/Authcontext";
 import { Button } from "react-bootstrap";
 import SearchBar from "../SearchBarByJobFeild";
 import SearchByJobLocation from "../SearchByJobLocation";
+import { useNavigate } from "react-router-dom";
 
 
 import "./jobmodify.css";
@@ -13,7 +14,15 @@ const JobModify = () => {
   const [jobs, setJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [jobsPerPage] = useState(4); // You can adjust the number of jobs per page here
-  const { getToken } = useAuth();
+  const { isLoggedIn, getToken } = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Check if the user is not logged in when the component mounts
+    if (!isLoggedIn) {
+      alert("Please log in first");
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
   
   const fetchData = async () => {
     try {
@@ -115,7 +124,7 @@ const JobModify = () => {
       <br></br>
       <br></br>
       <Sidebar>
-        <h3>Job Modifification Form</h3>
+        <h3 className="text-center mt-3">Job Modifification Form</h3>
         {/* Search Bar Component */}
         <div className="row">
           <div className="col-md-6 ">

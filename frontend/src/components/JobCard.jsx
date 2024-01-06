@@ -31,7 +31,9 @@ const JobCard = (props) => {
             </h6>
             <p className="card-text mx-2">Location: {props.workLocation}</p>
             <p className="card-text mx-2">Salary: Rs: {props.salary}</p>
-            <p className="card-text mx-2">Due Date: {props.dueDate}</p>
+            {/* <p className="card-text mx-2">Due Date: {props.dueDate}</p> */}
+            <p className="card-text mx-2">Due Date: {new Date(props.dueDate).toLocaleDateString()}</p>
+
             <p className="card-text mx-2">Work Method: {props.workMethod}</p>
             <p className="card-text mx-2">Work Type: {props.workType}</p>
 

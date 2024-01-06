@@ -50,13 +50,13 @@
 
 .form-group label {
   color: white;
-  padding-top: 20px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 0px;
 
 }
 
 .btn-submit-reg{
-    padding-top: 20px;
+    margin-bottom: 15px;
     
 }
 
@@ -78,7 +78,7 @@
 }
 
 .custom-btn:hover{
-    background-color: #ffffff;
+    background-color: #7a7a7a;
     color: #282e35;
     
 }

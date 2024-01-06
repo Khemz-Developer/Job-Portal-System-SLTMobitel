@@ -2,15 +2,26 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar";
 import axios from "axios";
 import { useAuth } from "../pages/Authcontext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 const ReceivedCVs = () => {
   const [applications, setApplications] = useState([]);
-  const { getToken } = useAuth();
   const [currentPage, setCurrentPage] = useState(1);
-  const [applicationsPerPage] = useState(8); // You can adjust the number of jobs per page here
+  const [applicationsPerPage] = useState(6); // You can adjust the number of jobs per page here
   const [acceptedApplications, setAcceptedApplications] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const { isLoggedIn, getToken } = useAuth();
+  const [ReceivedApplicationCount, setReceivedApplicationCount] =
+    useState(undefined);
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Check if the user is not logged in when the component mounts
+    if (!isLoggedIn) {
+      alert("Please log in first");
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
 
   const fetchAllApplications = async () => {
     try {
@@ -28,31 +39,31 @@ const ReceivedCVs = () => {
       setApplications(response.data);
       //console.log(response.data);
       //console.log(applications);
-
     } catch (error) {
-     // alert("You must Login First");
-      console.log(error) ;
+      // alert("You must Login First");
+      console.log(error);
     }
   };
 
-  const handleDelete = async (appId)=>{
-    try{
-      const config ={
-        headers:{
-          Authorization:`Bearer ${getToken()}`,
+  const handleDelete = async (appId) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
         },
       };
 
       const response = await axios.delete(
         `http://localhost:3000/api/v1/applications/delete-single-applications/${appId}`,
-      config
+        config
       );
 
-      if(response.status===200){
+      if (response.status === 200) {
         alert("Application Succesfully Deleted !");
         fetchAllApplications();
+        FindAllReceivedApplication();
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
@@ -64,21 +75,23 @@ const ReceivedCVs = () => {
           Authorization: `Bearer ${getToken()}`,
         },
       };
-  
+
       // Send request to mark application as accepted
       const response = await axios.post(
         `http://localhost:3000/api/v1/applications/accept/${appId}`,
         {},
         config
       );
-  
+
       if (response.status === 200) {
         // Remove accepted application from applications state
         const updatedApplications = applications.filter(
           (application) => application._id !== appId
         );
         setApplications(updatedApplications);
-  
+        // Fetch the updated count after accepting the application
+        FindAllReceivedApplication();
+
         // Add the accepted application to the acceptedApplications state
         setAcceptedApplications([...acceptedApplications, response.data]);
       }
@@ -86,25 +99,52 @@ const ReceivedCVs = () => {
       console.log(error);
     }
   };
-  
+
   const handleViewPdf = (pdfLink) => {
     window.open(pdfLink, "_blank");
   };
-  
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/api/v1/applications/admin-find-applicant", // address need to chnage
+        {
+          headers: {
+            searchterm: searchTerm,
+          },
+        }
+      );
+      setApplications(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const FindAllReceivedApplication = async () => {
+    const ApplicationCount = await axios.get(
+      "http://localhost:3000/api/v1/applications/count-pending-applications"
+    );
+    setReceivedApplicationCount(ApplicationCount.data);
+    console.log(ApplicationCount);
+    console.log(ApplicationCount.data);
+  };
   useEffect(() => {
     fetchAllApplications();
+    FindAllReceivedApplication();
   }, [getToken]);
 
   useEffect(() => {
     //console.log(applications);
   }, [applications]);
 
-   // Pagination logic
-   const indexOfLastApplication = currentPage * applicationsPerPage;
-   const indexOfFirstApplication = indexOfLastApplication - applicationsPerPage;
-   const currentApplication = applications.slice(indexOfFirstApplication, indexOfLastApplication);
- 
-   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // Pagination logic
+  const indexOfLastApplication = currentPage * applicationsPerPage;
+  const indexOfFirstApplication = indexOfLastApplication - applicationsPerPage;
+  const currentApplication = applications.slice(
+    indexOfFirstApplication,
+    indexOfLastApplication
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -112,7 +152,29 @@ const ReceivedCVs = () => {
       <br></br>
       <br></br>
       <Sidebar>
-        <h3> Received CVs</h3>
+        <h3 className="text-center mt-3">
+          {ReceivedApplicationCount
+            ? `Received ${ReceivedApplicationCount.count} Job Applications`
+            : "No Applications Received Yet"}{" "}
+        </h3>
+
+        <div className="search-options  mt-3">
+          <div className="row my-2">
+            <input
+              className="col-6 m-3 search-bar"
+              type="text"
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search by Job Field, Job Position..."
+            />
+            <button
+              onClick={handleSearch}
+              className="col-1 m-3 searchbutton"
+              type=""
+            >
+              SEARCH
+            </button>
+          </div>
+        </div>
         {/*table */}
         <div className="container modi-container  pt-5">
           <div className="">
@@ -123,7 +185,9 @@ const ReceivedCVs = () => {
                   <th scope="col">Job Feild</th>
                   <th scope="col">Job Position</th>
                   <th scope="col">Email</th>
-                  <th className="px-4" scope="col">CV File</th>
+                  <th className="px-4" scope="col">
+                    CV File
+                  </th>
                   <th scope="col">Manage User</th>
                 </tr>
               </thead>
@@ -134,21 +198,23 @@ const ReceivedCVs = () => {
                     <td>{application.jobField}</td>
                     <td>{application.jobPosition}</td>
                     <td>{application.email}</td>
-                    <td><Link >
-                    <Button
-                        variant="outline-secondary"
-                        className="btn mx-2 my-1 "
-                        onClick={() => handleViewPdf(application.cvFile)}
-                      >
-                        View PDF
-                      </Button>
-                      </Link></td>
+                    <td>
+                      <Link>
+                        <Button
+                          variant="outline-secondary"
+                          className="btn mx-2 my-1 "
+                          onClick={() => handleViewPdf(application.cvFile)}
+                        >
+                          View PDF
+                        </Button>
+                      </Link>
+                    </td>
                     <td className="flex ">
-                      <Link >
+                      <Link>
                         <Button
                           variant="outline-secondary"
                           className="btn mx-2 "
-                          onClick={()=>handleAccept(application._id)}
+                          onClick={() => handleAccept(application._id)}
                         >
                           Accept
                         </Button>
@@ -156,11 +222,11 @@ const ReceivedCVs = () => {
                       <Button
                         variant="outline-danger"
                         className="btn "
-                        onClick={()=>handleDelete(application._id)}
+                        onClick={() => handleDelete(application._id)}
                       >
-                        Reject
+                        Delete
                       </Button>
-                      <Link to={`view-application/${application._id}`} >
+                      <Link to={`view-application/${application._id}`}>
                         <Button variant="outline-info" className="btn m-2 ">
                           View
                         </Button>
@@ -173,19 +239,24 @@ const ReceivedCVs = () => {
           </div>
           {/* Pagination */}
           <ul className="pagination">
-            {Array.from({ length: Math.ceil(applications.length / applicationsPerPage) }, (_, i) => (
-              <li key={i} className={`page-item ${i + 1 === currentPage ? "active" : ""}`}>
-                <button className="page-link" onClick={() => paginate(i + 1)}>
-                  {i + 1}
-                </button>
-              </li>
-            ))}
+            {Array.from(
+              { length: Math.ceil(applications.length / applicationsPerPage) },
+              (_, i) => (
+                <li
+                  key={i}
+                  className={`page-item ${
+                    i + 1 === currentPage ? "active" : ""
+                  }`}
+                >
+                  <button className="page-link" onClick={() => paginate(i + 1)}>
+                    {i + 1}
+                  </button>
+                </li>
+              )
+            )}
           </ul>
-          </div>
+        </div>
       </Sidebar>
-     
-      
-      
     </div>
   );
 };

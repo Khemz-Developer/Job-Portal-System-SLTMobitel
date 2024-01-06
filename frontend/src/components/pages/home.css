@@ -14,3 +14,24 @@
     opacity: 70%;
 }
 
+.active-jobs {
+    font-size: 3rem; /* Default font size for larger screens */
+  
+    @media (max-width: 1200px) {
+      font-size: 2.0rem; /* Adjust font size for screens up to 1200px */
+    }
+  
+    @media (max-width: 992px) {
+      text-align: center;
+        font-size: 2rem; /* Adjust font size for screens up to 992px */
+    }
+  
+    @media (max-width: 768px) {
+      font-size: 1.5rem; /* Adjust font size for screens up to 768px */
+      text-align: center;
+    }
+  
+    /* Add more media queries as needed for smaller screens */
+  }
+  
+

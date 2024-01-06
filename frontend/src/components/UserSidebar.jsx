@@ -3,7 +3,7 @@ import {
   FaBars,
   FaRegChartBar,
   FaTh,
-  FaUserAlt,
+  // FaUserAlt,
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import "./UserSidebar.css";
@@ -14,14 +14,14 @@ const UserSidebar = ({ children }) => {
   const menuItem = [
     {
       path: "/uservacancy",
-      name: "Job Vacancies",
+      name: "Jobs",
       icon: <FaTh />,
     },
-    {
-      path: "/apply",
-      name: "Job Apply",
-      icon: <FaUserAlt />,
-    },
+    // {
+    //   path: "/apply",
+    //   name: "Job Apply",
+    //   icon: <FaUserAlt />,
+    // },
     {
       path: "/status",
       name: "Job Status",

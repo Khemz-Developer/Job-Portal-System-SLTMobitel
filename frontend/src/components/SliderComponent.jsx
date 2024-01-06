@@ -1,7 +1,8 @@
-import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "./SliderComponent.css";
 
 const SliderComponent = ({ jobFields }) => {
   const settings = {
@@ -35,7 +36,9 @@ const SliderComponent = ({ jobFields }) => {
 
   return (
     <div className="container">
-      <h2 className="text-center mb-3">Job Categories Provide By Us!</h2>
+      <h2 className="text-center categories mb-3">
+        Job Categories Provide By Us!
+      </h2>
       <Slider {...settings}>
         {jobFields.map((jobField, index) => (
           <div key={index} className="card mb-5">
@@ -51,7 +54,6 @@ const SliderComponent = ({ jobFields }) => {
 };
 
 export default SliderComponent;
-
 
 // import React from 'react';
 // import Slider from 'react-slick';
@@ -107,13 +109,10 @@ export default SliderComponent;
 
 // export default SliderComponent;
 
-
-
 // import React from 'react'
 // import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
-
 
 // function Arrow(props) {
 //     const { className, style, onClick } = props;
@@ -128,7 +127,7 @@ export default SliderComponent;
 
 // const SliderComponent = () => {
 //     var settings = {
-       
+
 //         dots: true,
 //         infinite: true,
 //         speed: 500,
@@ -142,64 +141,59 @@ export default SliderComponent;
 //             breakpoint: 1024,
 //             settings: {
 //               slidesToShow: 2,
-              
+
 //             }
 //           },
 //           {
 //             breakpoint: 768,
 //             settings: {
 //               slidesToShow: 1,
-             
+
 //             }
 //           },
 //           {
 //             breakpoint: 480,
 //             settings: {
 //               slidesToShow: 1,
-           
+
 //             }
 //           }
 //         ]
 //       };
-  
+
 //   return (
 //     <div className='container'>
 //         <h2 className='text-center mb-3'> Job Categories Provide By Us!</h2>
 //         <Slider {...settings}>
 //           <div className='card mb-5'>
-          
+
 //             <div className="card-body text-center">
 //                 <h3>slack</h3>
 //                 <p>we use react slick   ...</p>
 //             </div>
 //           </div>
 //           <div className='card mb-5'>
-          
+
 //             <div className="card-body text-center">
 //                 <h3>slack</h3>
 //                 <p>we use react slick   ...</p>
 //             </div>
 //           </div>
 //           <div className='card mb-5'>
-          
+
 //             <div className="card-body text-center">
 //                 <h3>slack</h3>
 //                 <p>we use react slick   ...</p>
 //             </div>
 //           </div>
 //           <div className='card mb-5'>
-          
+
 //             <div className="card-body text-center">
 //                 <h3>slack</h3>
 //                 <p>we use react slick   ...</p>
 //             </div>
 //           </div>
-          
-          
-         
-         
-          
-          
+
 //         </Slider>
 //       </div>
 //   )

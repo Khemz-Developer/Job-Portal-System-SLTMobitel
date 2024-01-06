@@ -34,6 +34,11 @@ const Sidebar = ({ children }) => {
       name: "Accepted CVs",
       icon: <FaCommentAlt />,
     },
+    {
+      path: "/role",
+      name: "Users",
+      icon: <FaUserAlt />,
+    },
   ];
 
   return (

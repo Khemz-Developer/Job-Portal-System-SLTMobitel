@@ -1,3 +1,5 @@
+
+
 const { response } = require('express');
 const JobSchema = require('../models/JobSchema');
 const Job =  require('../models/JobSchema');
@@ -15,6 +17,7 @@ const saveJob = (req,resp)=>{
   
   // Create a new Job instance using the data from the request body
   console.log(req.body);
+ 
   const tempJob = new Job({
     
     jobField: req.body.jobField,
@@ -191,22 +194,6 @@ const singleJob  =async(req,res)=>{
   }
 
 
-  // const getUniqueJobFields = async (req, res) => {
-  //   try {
-  //     // Use the distinct method to get unique values of jobField
-  //     const jobFields = await Job.distinct('jobField');
-  
-  //     // Create a response object with jobFields array
-  //     const response = {
-  //       jobFields,
-  //     };
-  //     res.status(200).json(response);
-  //   } catch (error) {
-  //     // Handle errors
-  //     console.error('Error fetching job fields:', error);
-  //     res.status(500).json({ message: 'Error: ' + error.message });
-  //   }
-  // };
   
   const getUniqueJobFields = async (req, res) => {
     try {
