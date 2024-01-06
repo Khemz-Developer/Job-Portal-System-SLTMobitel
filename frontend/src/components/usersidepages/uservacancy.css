@@ -29,22 +29,23 @@
 
 /* Small (SM) - 576px to 767px */
 @media (min-width: 576px) and (max-width: 767px) {
-    .search-options {
-        flex-direction: column; /* Change flex direction to column */
-        align-items: center !important;
-        margin: 20px;
-      }
-      .searchbutton {
-        display: block;
-        width: 200px;
-        margin: 10px auto; /* Adjust margin to center the button */
-      }
-        
-      
-      .search-bar{
-        margin-left: 0px;
-        width: 500px;
-      }
+  .search-options {
+    flex-direction: column;
+    align-items: center !important;
+    margin: 20px;
+}
+
+.searchbutton {
+    margin-right: 10px !important;
+    display: block;
+    width: 120px !important; /* Adjusted button width */
+    margin: 10px auto;
+}
+
+.search-bar {
+    margin-left: 0px;
+    width: 400px; /* Adjusted search bar width */
+}
 }
 
 /* Medium (MD) - 768px to 991px */

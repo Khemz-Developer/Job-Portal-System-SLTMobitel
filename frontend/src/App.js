@@ -7,7 +7,6 @@ import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 
 import { AuthProvider } from "../src/components/pages/Authcontext";
-// import Footer from "./components/Footer";
 import AcceptedCVs from "./components/SidePages/AcceptedCVs";
 import JobCreate from "./components/SidePages/JobCreate";
 import JobModify from "./components/SidePages/JobModify";

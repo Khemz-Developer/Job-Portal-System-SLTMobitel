@@ -1,53 +1,5 @@
-// const JobApplication = require("../models/JobApplySchema");
 
-// const saveApplication = (req, resp) => {
-//   // Create a new Job instance using the data from the request body
-//   //console.log(req.body);
-//   const {
-//     jobField,
-//     jobPosition,
-//     nameofApplicant,
-//     mobileNumber,
-//     dateofBirth,
-//     nic,
-//     email,
-//     address,
-//     olResults,
-//     alResults,
-//     skills,
-//     activities,
-//     cvFile, // Assuming this is the download URL for the PDF
-//   } = req.body;
-
-//   const tempApplication = new JobApplication({
-//     jobField,
-//     jobPosition,
-//     nameofApplicant,
-//     cvFile, // Store the PDF download URL in the MongoDB document
-//     mobileNumber,
-//     dateofBirth,
-//     nic,
-//     email,
-//     address,
-//     olResults,
-//     alResults,
-//     skills,
-//     activities,
-//   });
-
-//   tempApplication
-//     .save()
-//     .then((result) => {
-//       resp
-//         .status(201)
-//         .json({ status: true, message: "Application was saved!" });
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       resp.status(500).json(error);
-//     });
-// };
-
+const JobApplySchema = require("../models/JobApplySchema");
 const JobApplication = require("../models/JobApplySchema");
 const nodemailer=require('nodemailer');
 const saveApplication = (req, resp) => {
@@ -161,14 +113,7 @@ const getAcceptedApplication = async (req, res) => {
     return res.status(500).json({ message: "Error :" + error.message });
   }
 };
-// const getAllApplications = async (req, res) => {
-//   try {
-//     const applications = await JobApplication.find({});
-//     res.status(200).json(applications);
-//   } catch {
-//     res.status(500).json({ message: "Error:" + error.message });
-//   }
-// };
+
 
 const getAllApplications = async (req, res) => {
   try {
@@ -231,6 +176,39 @@ const ApplicantFind = (req, resp) => {
     });
 };
 
+const ReceivedApplicationCount = async(req,resp)=>{
+  try{
+   const count =await JobApplySchema.countDocuments({status: "Pending"});
+   resp.status(200).json({ count });
+
+  }catch(error){
+    return resp.status(500).json({message:"internal server error"})
+  }
+}
+const AccepttedApplicationCount = async(req,resp)=>{
+  try{
+   const count =await JobApplySchema.countDocuments({status: "Accepted"});
+   resp.status(200).json({ count });
+
+  }catch(error){
+    return resp.status(500).json({message:"internal server error"})
+  }
+}
+
+const getApplicationsByEmail = async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    // Use your model to find applications by email
+    const applications = await JobApplication.find({ email });
+
+    res.json({ applications });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   saveApplication,
   getAllApplications,
@@ -239,4 +217,7 @@ module.exports = {
   acceptApplication,
   getAcceptedApplication,
   ApplicantFind,
+  ReceivedApplicationCount,
+  AccepttedApplicationCount,
+  getApplicationsByEmail
 };

@@ -1,93 +1,77 @@
-import { Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-
-const columns = [
-    { id: 'jobField', label: 'Job Field', minWidth: 100 },
-    { id: 'jobTitle', label: 'Job Title', minWidth: 100 },
-    { id: 'status', label: 'Status', minWidth: 100 },
-];
-
-function createData(jobField, jobTitle, status, docId) {
-   return { jobField, jobTitle, status, docId };
-}
-
+// import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { useUser } from "../pages/UserContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../pages/Authcontext";
 const UserStatus = () => {
-    const [userStatusRows, setUserStatusRows] = useState([]);
+  const { userEmail } = useUser();
+  const [currentJobs, setCurrentJobs] = useState([]);
+  const navigate = useNavigate(); // Add this line
+  const { isLoggedIn } = useAuth(); // Use the getToken function from the useAuth hook
+  const fetchApplications = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/v1/applications/get-applications-by-email?email=${userEmail}`
+      );
 
-    useEffect(() => {
-        const dummyUserStatus = [
-            createData('IT', 'Software Engineer', 'Pending', '1'),
-            createData('Finance', 'Financial Analyst', 'Approved', '2'),
-            // Add more dummy data as needed
-        ];
+      setCurrentJobs(response.data.applications);
+    } catch (error) {
+      console.error(error);
+      // Handle error as needed
+    }
+  }, [userEmail]);
 
-        setUserStatusRows(dummyUserStatus);
-    }, []);
-
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchApplications();
     };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+    fetchData();
+  }, [userEmail, fetchApplications]); // Include fetchApplications in the dependency array
 
-    return (
-        <Container maxWidth="lg">
-            <Paper elevation={12} sx={{ p: '2%' }}>
-                
-                    <Typography variant="h5"  gutterBottom textAlign="center" fontWeight="medium" sx={{ my: '10px' }}>
-                        User Status
-                    </Typography>
-                {/* //stickyHeader aria-label="sticky table" */}
-                <TableContainer sx={{ maxHeight: 500 }}>
-                    <Table > 
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth, fontSize: '16px', fontWeight: 'bold'  }}
-                                    >
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {userStatusRows
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row) => (
-                                    <TableRow key={row.docId} hover role="checkbox" tabIndex={-1}>
-                                        {columns.map((column) => (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {row[column.id]}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+  useEffect(() => {
+    // Check if the user is not logged in
+    if (!isLoggedIn) {
+      // Show an alert
+      alert("Before Apply Vacancies, Please log in first ");
+      // Redirect to the login page
+      navigate("/login");
+    }
 
-                <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={userStatusRows.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                />
-            </Paper>
-        </Container>
-    );
- 
-}
+    
+  }, [isLoggedIn, navigate]);
 
-export default UserStatus
+  return (
+    <div>
+      <br />
+      <h3 className="text-center">Signup Email: {userEmail}</h3>
+      {/* ... (other content) */}
+      <br /><br />
+      <table className="table table-hover">
+        <thead className="table-primary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Job Field</th>
+            <th scope="col">Job Position</th>
+            <th scope="col">Email</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentJobs.map((job, index) => (
+            <tr key={index}>
+              <th>{index + 1}</th>
+              <td>{job.jobField}</td>
+              <td>{job.jobPosition}</td>
+              <td>{job.email}</td>
+              <td>{job.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default UserStatus;

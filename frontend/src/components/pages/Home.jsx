@@ -27,8 +27,8 @@ const Home = () => {
       "http://localhost:3000/api/v1/jobs/total-job-count"
     );
     setjobcount(jobCount.data);
-    //console.log(jobCount);
-    //console.log(jobCount.data);
+    console.log(jobCount);
+    console.log(jobCount.data);
   };
 
   useEffect(() => {

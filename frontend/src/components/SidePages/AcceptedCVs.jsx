@@ -11,7 +11,9 @@ const AcceptedCVs = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [applicationsPerPage] = useState(5); // You can adjust the number of jobs per page here
   const [searchTerm, setSearchTerm] = useState("");
+  const [AcceptedApplicationCount, setAcceptedApplicationCount] = useState(undefined);
   const { isLoggedIn, getToken } = useAuth();
+  
   const navigate = useNavigate();
   useEffect(() => {
     // Check if the user is not logged in when the component mounts
@@ -62,6 +64,7 @@ const AcceptedCVs = () => {
 
       alert("Application Successfully Deleted!");
       fetchAcceptedApplications();
+      FindAllAcceptedApplication();
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +78,7 @@ const AcceptedCVs = () => {
         },
       };
 
-      const response = await axios.get(
+   const response = await axios.get(
         "http://localhost:3000/api/v1/applications/get-accepted-applications",
         config
       );
@@ -85,9 +88,20 @@ const AcceptedCVs = () => {
     }
   };
 
+  const FindAllAcceptedApplication = async ()=>{
+
+    const ApplicationCount = await axios.get("http://localhost:3000/api/v1/applications/count-accepted-applications");
+    setAcceptedApplicationCount(ApplicationCount.data);
+   // console.log(ApplicationCount);
+    //console.log(ApplicationCount.data);
+  }
+
   useEffect(() => {
     fetchAcceptedApplications();
+    FindAllAcceptedApplication();
   }, [getToken]);
+
+
   const handleViewPdf = (pdfLink) => {
     window.open(pdfLink, "_blank");
   };
@@ -98,7 +112,7 @@ const AcceptedCVs = () => {
       <br></br>
       <Sidebar>
         <h3 className="text-center mt-2">
-          Accepted CVs [Filtered the Applications From Recieved Application]
+      {AcceptedApplicationCount && AcceptedApplicationCount.count} Successfully Curated CVs from the pool of Received Applications.
         </h3>
 
         <div className="search-options  mt-5">

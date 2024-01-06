@@ -1,3 +1,4 @@
+
 // import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import "./signup.css";
@@ -14,25 +15,32 @@
 //     username: "",
 //     email: "",
 //     password: "",
+//     confirmPassword: "", // Add this line
 //   });
-
+//   const [passwordsMatch, setPasswordsMatch] = useState(true); // New state for password match
 //   const handleChange = (e) => {
 //     setFormData({
 //       ...formData,
 //       [e.target.id]: e.target.value,
 //     });
+//     // Check if passwords match and update state
+//     setPasswordsMatch(e.target.id === "confirmPassword" ? formData.password === e.target.value : passwordsMatch);
 //   };
 
- 
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
-  
+
+//     // Add this validation check
+//     if (!passwordsMatch) {
+//       // Update UI to indicate password mismatch
+//       return;
+//     }
 //     try {
 //       const response = await axios.post(
 //         "http://localhost:3000/api/v1/users/signup",
 //         formData
 //       );
-  
+
 //       if (response.status === 201) {
 //         // Successful registration, navigate to the login page
 //         console.log(response.data.message); // Log the success message
@@ -50,8 +58,8 @@
 //       }
 //     } catch (error) {
 //       // Handle network errors or unexpected errors
-//       console.error("Error during registration:", error);
-  
+//       console.error("Error during registration:", error) ;
+
 //       if (axios.isAxiosError(error) && error.response) {
 //         const status = error.response.status;
 //         if (status === 409) {
@@ -59,7 +67,9 @@
 //           alert("Email already exists. Please use a different email.");
 //         } else {
 //           // Other Axios errors
-//           alert("Unexpected error during registration. Please check the console for details.");
+//           alert(
+//             "Unexpected error during registration. Please check the console for details."
+//           );
 //         }
 //       } else {
 //         // Non-Axios errors (network errors, etc.)
@@ -67,7 +77,6 @@
 //       }
 //     }
 //   };
-  
 
 //   return (
 //     <div className="home-main-div">
@@ -136,8 +145,25 @@
 //                   />
 //                 </div>
 
+//                 <div className="form-group">
+//                   <label htmlFor="confirmPassword">Confirm Password:</label>
+//                   <input
+//                     type="password"
+//                     id="confirmPassword"
+//                     className={`form-control ${!passwordsMatch ? "is-invalid" : ""}`} // Add 'is-invalid' class for styling
+//                     placeholder="Confirm your password"
+//                     onChange={handleChange}
+//                     value={formData.confirmPassword}
+//                     required
+//                   />
+//                   {!passwordsMatch && <div className="invalid-feedback">Passwords do not match.</div>}
+//                 </div>
+
 //                 <div className="d-flex justify-content-end btn-submit-reg">
-//                   <button type="submit" className="btn btn-primary custom-btn mb">
+//                   <button
+//                     type="submit"
+//                     className="btn btn-primary custom-btn mb"
+//                   >
 //                     Submit
 //                   </button>
 //                 </div>
@@ -147,7 +173,7 @@
 //         </Container>
 //       </div>
 //       <div className="mt-5">
-//       <Footer/>
+//         <Footer />
 //       </div>
 //     </div>
 //   );

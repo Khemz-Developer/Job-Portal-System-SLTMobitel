@@ -3,6 +3,7 @@ import "./uservacancy.css";
 
 import JobCard from "../JobCard";
 import axios from "axios";
+import UserSidebar from "../UserSidebar";
 
 const UserVacancy = () => {
   const [jobs, setJobs] = useState([]);
@@ -58,7 +59,7 @@ const UserVacancy = () => {
       <br></br>
       <br></br>
       <br></br>
-
+      <UserSidebar>
       <h3 className="pt-5 text-center">Job Vacancies Available For You !</h3>
       
       <div className="search-options  mt-5">
@@ -109,6 +110,7 @@ const UserVacancy = () => {
             ))}
           </ul>
       </div>
+      </UserSidebar>
     </div>
   );
 };
